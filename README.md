@@ -28,10 +28,10 @@ This node starts SLAM Toolbox in asynchronous online mode, subscribing to `/scan
 
 ### 3. Teleoperate the Robot
 
-Use the keyboard teleop package or your own teleoperation node to move the robot and explore the environment:
+Use the keyboard teleop package which is provided 'four_wheel_teleop' branch. 
 
 ```bash
-ros2 run teleop_twist_keyboard teleop_twist_keyboard --ros-args -r /cmd_vel:=/cmd_vel
+ros2 run four_wheel_teleop teleop_node
 ```
 
 ### 4. Save the Map
