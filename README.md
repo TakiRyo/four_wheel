@@ -2,13 +2,9 @@
 
 This repository contains a 2D SLAM-ready simulation environment using a custom four-wheel mobile robot in Gazebo, integrated with SLAM Toolbox and RViz.
 
----
-
 ## SLAM Mapping (2D)
 
 This package supports **2D SLAM mapping** using [SLAM Toolbox](https://github.com/SteveMacenski/slam_toolbox).
-
----
 
 ## How to Run SLAM
 
