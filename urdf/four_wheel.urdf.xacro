@@ -18,9 +18,9 @@
 
     <xacro:property name="laser_mass" value="0.1"/>
     <xacro:property name="laser_radius" value="0.05"/>
-    <xacro:property name="laser_length" value="0.04"/>
+    <xacro:property name="laser_length" value="0.05"/>
     <xacro:property name="laser_distance_z" value="${base_height/2 + laser_length/2}"/>
-    <xacro:property name="laser_distance_x" value="0"/>
+    <xacro:property name="laser_distance_x" value="-0.1"/>
 
     <xacro:property name="camera_size_x" value="0.02"/>
     <xacro:property name="camera_size_y" value="0.1"/>
@@ -28,6 +28,13 @@
     <xacro:property name="camera_distance_x" value="${base_length/2 + camera_size_x/2}"/>
     <xacro:property name="camera_distance_y" value="0"/>
     <xacro:property name="camera_distance_z" value="0"/>
+
+    <xacro:property name="imu_size_x" value="0.05"/>
+    <xacro:property name="imu_size_y" value="0.05"/>
+    <xacro:property name="imu_size_z" value="0.05"/>
+    <xacro:property name="imu_distance_x" value="0.1"/>
+    <xacro:property name="imu_distance_y" value="0"/>
+    <xacro:property name="imu_distance_z" value="${base_height/2 + imu_size_z/2}"/>
 
     
     <!-- Include the common gazebo macros -->
@@ -114,5 +121,9 @@
 
     <!-- Include the camera -->
     <xacro:include filename="$(find four_wheel)/urdf/camera.xacro" />
+
+    <!-- Include the IMU -->
+    <xacro:include filename="$(find four_wheel)/urdf/bno055_imu.xacro" />
+    <xacro:add_bno055_imu parent_link="body_link"/>
 
 </robot>
