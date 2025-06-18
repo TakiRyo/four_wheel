@@ -1,13 +1,13 @@
 <?xml version="1.0"?>
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro" >
 
-    <joint name="velodyne_joint" type="fixed">
+    <joint name="lidar_joint" type="fixed">
         <parent link="body_link"/>
-        <child link="velodyne_link"/>
+        <child link="lidar_link"/>
         <origin xyz="${laser_distance_x} 0 ${laser_distance_z}" rpy="0 0 0"/>
     </joint>
 
-    <link name="velodyne_link">
+    <link name="lidar_link">
         <visual>
             <geometry>
                 <cylinder radius="${laser_radius}" length="${laser_length}"/>
@@ -24,7 +24,7 @@
         </xacro:inertial_cylinder>
     </link>
 
-    <gazebo reference="velodyne_link">
+    <gazebo reference="lidar_link">
         <material>Gazebo/Red</material>
 
         <sensor name="laser" type="ray">
@@ -38,23 +38,18 @@
                         <min_angle>0</min_angle>
                         <max_angle>6.28</max_angle>
                     </horizontal>
-                    <vertical>
-                        <samples>16</samples>
-                        <min_angle>-0.2618</min_angle>
-                        <max_angle>0.2618</max_angle>
-                    </vertical>
                 </scan>
                 <range>
                     <min>0.22</min>
                     <max>6</max>
                 </range>
             </ray>
-            <plugin name="gazebo_ros_laser" filename="libgazebo_ros_ray_sensor.so">
+            <plugin name="laser_controller" filename="libgazebo_ros_ray_sensor.so">
                 <ros>
-                <argument>~/out:=velodyne_points</argument>
+                    <argument>~/out:=scan</argument>
                 </ros>
-                <topicName>/velodyne_points</topicName>
-                <frameName>velodyne_link</frameName>
+                <output_type>sensor_msgs/LaserScan</output_type>
+                <frameName>lidar_link</frameName>
             </plugin>
         </sensor>
     </gazebo>

@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <!-- http://wiki.ros.org/urdf/XML/link  -->
-<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="four_wheels">
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="four_wheel_2d">
 
     <!-- Define constants -->
     <xacro:property name="pi" value="1.570795"/>
@@ -18,9 +18,9 @@
 
     <xacro:property name="laser_mass" value="0.1"/>
     <xacro:property name="laser_radius" value="0.05"/>
-    <xacro:property name="laser_length" value="0.04"/>
+    <xacro:property name="laser_length" value="0.05"/>
     <xacro:property name="laser_distance_z" value="${base_height/2 + laser_length/2}"/>
-    <xacro:property name="laser_distance_x" value="0"/>
+    <xacro:property name="laser_distance_x" value="-0.1"/>
 
     <xacro:property name="camera_size_x" value="0.02"/>
     <xacro:property name="camera_size_y" value="0.1"/>
@@ -29,10 +29,17 @@
     <xacro:property name="camera_distance_y" value="0"/>
     <xacro:property name="camera_distance_z" value="0"/>
 
+    <xacro:property name="imu_size_x" value="0.05"/>
+    <xacro:property name="imu_size_y" value="0.05"/>
+    <xacro:property name="imu_size_z" value="0.05"/>
+    <xacro:property name="imu_distance_x" value="0.1"/>
+    <xacro:property name="imu_distance_y" value="0"/>
+    <xacro:property name="imu_distance_z" value="${base_height/2 + imu_size_z/2}"/>
+
     
     <!-- Include the common gazebo macros -->
-    <xacro:include filename="$(find four_wheel)/urdf/common_gazebo.xacro" />
-    <xacro:include filename="$(find four_wheel)/urdf/inertial_macro.xacro" />
+    <xacro:include filename="$(find four_wheel_2d)/urdf/common_gazebo.xacro" />
+    <xacro:include filename="$(find four_wheel_2d)/urdf/inertial_macro.xacro" />
      
     <!-- This is the base of the robot -->
     <link name="base_footprint"/>
@@ -107,12 +114,17 @@
      
      
     <!-- Include the skid steering drive plugin -->
-    <xacro:include filename="$(find four_wheel)/urdf/four_wheel_drive_gazebo.xacro" />
+    <xacro:include filename="$(find four_wheel_2d)/urdf/four_wheel_drive_gazebo.xacro" />
 
     <!-- Include the lidar -->
-    <xacro:include filename="$(find four_wheel)/urdf/lidar3d.xacro" />
+    <xacro:include filename="$(find four_wheel_2d)/urdf/lidar2d.xacro" />
 
     <!-- Include the camera -->
-    <xacro:include filename="$(find four_wheel)/urdf/camera.xacro" />
+    <xacro:include filename="$(find four_wheel_2d)/urdf/camera.xacro" />
+    
 
+    <!-- Include the IMU -->
+    <xacro:include filename="$(find four_wheel_2d)/urdf/bno055_imu.xacro" />
+    <xacro:add_bno055_imu parent_link="body_link"/>
+    
 </robot>

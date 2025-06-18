@@ -1,0 +1,10 @@
+build/
+install/
+log/
+
+*.swp
+*.swo
+*~
+
+.vscode/
+.idea/
