@@ -50,5 +50,3 @@ This will save `my_map.pgm` and `my_map.yaml` inside the `maps/` directory.
 ---
 
 More documentation coming soon!
-
-readme check
